@@ -113,8 +113,20 @@
 </head>
 <body>
   <div class="container">
-    <form id="formulario">
-      <div class="step active" id="step-0">
+    <div class="step active" id="step-inicio">
+  <h2>📘 Instruções de uso</h2>
+  <ul>
+    <li>1️⃣ <strong>Preencha na ordem</strong> – cada etapa te guia para examinar seus pensamentos de forma objetiva</li>
+    <li>2️⃣ <strong>Quanto mais específico melhor</strong> – quanto mais detalhes, melhor funciona</li>
+    <li>3️⃣ <strong>Foque nas evidências concretas</strong> – o que realmente aconteceu vs. o que você sentiu</li>
+    <li>4️⃣ <strong>Use regularmente</strong> – especialmente quando estiver tendo pensamentos difíceis</li>
+  </ul>
+  <div style="text-align:center; margin-top: 20px;">
+    <button onclick="iniciarFormulario()">🚀 Começar</button>
+  </div>
+</div>
+<form id="formulario">
+      
         <h2><span class="circle" style="background: var(--azul)">1</span>Situação 🧠</h2>
         <label for="situacao">Descreva a situação:</label>
         <textarea id="situacao"></textarea>
@@ -188,17 +200,31 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script>
-    let passoAtual = 0;
+    let passoAtual = -1;
     const campos = ["situacao", "pensamento", "emocao", "lembranca", "reacao"];
 
     function nextStep() {
-      document.getElementById(`step-${passoAtual}`).classList.remove("active");
+  if (passoAtual >= 0) {
+    document.getElementById(`step-${passoAtual}`).classList.remove("active");
+  } else {
+    document.getElementById("step-inicio").classList.remove("active");
+  }
+  passoAtual++;
+  document.getElementById(`step-${passoAtual}`).classList.add("active");
+}`).classList.remove("active");
       passoAtual++;
       document.getElementById(`step-${passoAtual}`).classList.add("active");
     }
 
     function prevStep() {
-      document.getElementById(`step-${passoAtual}`).classList.remove("active");
+  document.getElementById(`step-${passoAtual}`).classList.remove("active");
+  passoAtual--;
+  if (passoAtual >= 0) {
+    document.getElementById(`step-${passoAtual}`).classList.add("active");
+  } else {
+    document.getElementById("step-inicio").classList.add("active");
+  }
+}`).classList.remove("active");
       passoAtual--;
       document.getElementById(`step-${passoAtual}`).classList.add("active");
     }
