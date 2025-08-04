@@ -114,74 +114,72 @@
 <body>
   <div class="container">
     <div class="step active" id="step-inicio">
-  <h2>📘 Instruções de uso</h2>
-  <ul>
-    <li>1️⃣ <strong>Preencha na ordem</strong> – cada etapa te guia para examinar seus pensamentos de forma objetiva</li>
-    <li>2️⃣ <strong>Quanto mais específico melhor</strong> – quanto mais detalhes, melhor funciona</li>
-    <li>3️⃣ <strong>Foque nas evidências concretas</strong> – o que realmente aconteceu vs. o que você sentiu</li>
-    <li>4️⃣ <strong>Use regularmente</strong> – especialmente quando estiver tendo pensamentos difíceis</li>
-  </ul>
-  <div style="text-align:center; margin-top: 20px;">
-    <button onclick="iniciarFormulario()">🚀 Começar</button>
-  </div>
-</div>
-</div>
-<div class="step" id="step-0">
-<h2><span class="circle" style="background: var(--azul)">1</span>Situação 🧠</h2>
-        <label for="situacao">Descreva a situação:</label>
-        <textarea id="situacao"></textarea>
-        <label for="intensidade1">Intensidade: <span id="val1">0</span></label>
-        <input type="range" id="intensidade1" min="0" max="10">
-        <div class="nav-buttons">
-          <span></span><button type="button" onclick="nextStep()">Próximo →</button>
-        </div>
+      <h2>📘 Instruções de uso</h2>
+      <ul>
+        <li>1️⃣ <strong>Preencha na ordem</strong> – cada etapa te guia para examinar seus pensamentos de forma objetiva</li>
+        <li>2️⃣ <strong>Quanto mais específico melhor</strong> – quanto mais detalhes, melhor funciona</li>
+        <li>3️⃣ <strong>Foque nas evidências concretas</strong> – o que realmente aconteceu vs. o que você sentiu</li>
+        <li>4️⃣ <strong>Use regularmente</strong> – especialmente quando estiver tendo pensamentos difíceis</li>
+      </ul>
+      <div style="text-align:center; margin-top: 20px;">
+        <button onclick="iniciarFormulario()">🚀 Começar</button>
       </div>
-      <div class="step" id="step-1">
-        <h2><span class="circle" style="background: var(--roxo)">2</span>Pensamento 💭</h2>
-        <label for="pensamento">Qual foi o pensamento?</label>
-        <textarea id="pensamento"></textarea>
-        <label for="intensidade2">Intensidade: <span id="val2">0</span></label>
-        <input type="range" id="intensidade2" min="0" max="10">
-        <div class="nav-buttons">
-          <button type="button" onclick="prevStep()">← Anterior</button>
-          <button type="button" onclick="nextStep()">Próximo →</button>
-        </div>
-      </div>
-      <div class="step" id="step-2">
-        <h2><span class="circle" style="background: var(--verde)">3</span>Emoção 💓</h2>
-        <label for="emocao">O que você sentiu?</label>
-        <textarea id="emocao"></textarea>
-        <label for="intensidade3">Intensidade: <span id="val3">0</span></label>
-        <input type="range" id="intensidade3" min="0" max="10">
-        <div class="nav-buttons">
-          <button type="button" onclick="prevStep()">← Anterior</button>
-          <button type="button" onclick="nextStep()">Próximo →</button>
-        </div>
-      </div>
-      <div class="step" id="step-3">
-        <h2><span class="circle" style="background: var(--laranja)">4</span>Lembrança 🧠</h2>
-        <label for="lembranca">Houve alguma lembrança associada?</label>
-        <textarea id="lembranca"></textarea>
-        <label for="intensidade4">Intensidade: <span id="val4">0</span></label>
-        <input type="range" id="intensidade4" min="0" max="10">
-        <div class="nav-buttons">
-          <button type="button" onclick="prevStep()">← Anterior</button>
-          <button type="button" onclick="nextStep()">Próximo →</button>
-        </div>
-      </div>
-      <div class="step" id="step-4">
-        <h2><span class="circle" style="background: var(--vermelho)">5</span>Reação ⚡</h2>
-        <label for="reacao">Qual foi sua reação?</label>
-        <textarea id="reacao"></textarea>
-        <label for="intensidade5">Intensidade: <span id="val5">0</span></label>
-        <input type="range" id="intensidade5" min="0" max="10">
-        <div class="nav-buttons">
-          <button type="button" onclick="prevStep()">← Anterior</button>
-          <button type="button" onclick="mostrarResumo()">Finalizar ✅</button>
-        </div>
-      </div>
-    </form>
+    </div>
 
+    <div class="step" id="step-0">
+      <h2><span class="circle" style="background: var(--azul)">1</span>Situação 🧠</h2>
+      <label for="situacao">Descreva a situação:</label>
+      <textarea id="situacao"></textarea>
+      <label for="intensidade1">Intensidade: <span id="val1">0</span></label>
+      <input type="range" id="intensidade1" min="0" max="10">
+      <div class="nav-buttons">
+        <span></span><button type="button" onclick="nextStep()">Próximo →</button>
+      </div>
+    </div>
+    <div class="step" id="step-1">
+      <h2><span class="circle" style="background: var(--roxo)">2</span>Pensamento 💭</h2>
+      <label for="pensamento">Qual foi o pensamento?</label>
+      <textarea id="pensamento"></textarea>
+      <label for="intensidade2">Intensidade: <span id="val2">0</span></label>
+      <input type="range" id="intensidade2" min="0" max="10">
+      <div class="nav-buttons">
+        <button type="button" onclick="prevStep()">← Anterior</button>
+        <button type="button" onclick="nextStep()">Próximo →</button>
+      </div>
+    </div>
+    <div class="step" id="step-2">
+      <h2><span class="circle" style="background: var(--verde)">3</span>Emoção 💓</h2>
+      <label for="emocao">O que você sentiu?</label>
+      <textarea id="emocao"></textarea>
+      <label for="intensidade3">Intensidade: <span id="val3">0</span></label>
+      <input type="range" id="intensidade3" min="0" max="10">
+      <div class="nav-buttons">
+        <button type="button" onclick="prevStep()">← Anterior</button>
+        <button type="button" onclick="nextStep()">Próximo →</button>
+      </div>
+    </div>
+    <div class="step" id="step-3">
+      <h2><span class="circle" style="background: var(--laranja)">4</span>Lembrança 🧠</h2>
+      <label for="lembranca">Houve alguma lembrança associada?</label>
+      <textarea id="lembranca"></textarea>
+      <label for="intensidade4">Intensidade: <span id="val4">0</span></label>
+      <input type="range" id="intensidade4" min="0" max="10">
+      <div class="nav-buttons">
+        <button type="button" onclick="prevStep()">← Anterior</button>
+        <button type="button" onclick="nextStep()">Próximo →</button>
+      </div>
+    </div>
+    <div class="step" id="step-4">
+      <h2><span class="circle" style="background: var(--vermelho)">5</span>Reação ⚡</h2>
+      <label for="reacao">Qual foi sua reação?</label>
+      <textarea id="reacao"></textarea>
+      <label for="intensidade5">Intensidade: <span id="val5">0</span></label>
+      <input type="range" id="intensidade5" min="0" max="10">
+      <div class="nav-buttons">
+        <button type="button" onclick="prevStep()">← Anterior</button>
+        <button type="button" onclick="mostrarResumo()">Finalizar ✅</button>
+      </div>
+    </div>
     <div id="summary" class="step">
       <h2>📝 Seu Registro</h2>
       <div id="resultado"></div>
@@ -200,65 +198,33 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script>
-function iniciarFormulario() {
-  document.getElementById("step-inicio").classList.remove("active");
-  passoAtual = 0;
-  document.getElementById("step-0").classList.add("active");
-}
+    function iniciarFormulario() {
+      document.getElementById("step-inicio").classList.remove("active");
+      passoAtual = 0;
+      document.getElementById("step-0").classList.add("active");
+    }
 
-let passoAtual = -1;
+    let passoAtual = -1;
     const campos = ["situacao", "pensamento", "emocao", "lembranca", "reacao"];
 
     function nextStep() {
-  if (passoAtual >= 0) {
-    document.getElementById(`step-${passoAtual}`).classList.remove("active");
-  } else {
-    document.getElementById("step-inicio").classList.remove("active");
-  }
-  passoAtual++;
-  document.getElementById(`step-${passoAtual}`).classList.add("active");
-}`).classList.remove("active");
-  } else {
-    document.getElementById("step-inicio").classList.remove("active");
-  }
-  passoAtual++;
-  document.getElementById(`step-${passoAtual}`).classList.add("active");
-}`).classList.remove("active");
-  } else {
-    document.getElementById("step-inicio").classList.remove("active");
-  }
-  passoAtual++;
-  document.getElementById(`step-${passoAtual}`).classList.add("active");
-}`).classList.remove("active");
+      if (passoAtual >= 0) {
+        document.getElementById(`step-${passoAtual}`).classList.remove("active");
+      } else {
+        document.getElementById("step-inicio").classList.remove("active");
+      }
       passoAtual++;
       document.getElementById(`step-${passoAtual}`).classList.add("active");
     }
 
     function prevStep() {
-  document.getElementById(`step-${passoAtual}`).classList.remove("active");
-  passoAtual--;
-  if (passoAtual >= 0) {
-    document.getElementById(`step-${passoAtual}`).classList.add("active");
-  } else {
-    document.getElementById("step-inicio").classList.add("active");
-  }
-}`).classList.remove("active");
-  passoAtual--;
-  if (passoAtual >= 0) {
-    document.getElementById(`step-${passoAtual}`).classList.add("active");
-  } else {
-    document.getElementById("step-inicio").classList.add("active");
-  }
-}`).classList.remove("active");
-  passoAtual--;
-  if (passoAtual >= 0) {
-    document.getElementById(`step-${passoAtual}`).classList.add("active");
-  } else {
-    document.getElementById("step-inicio").classList.add("active");
-  }
-}`).classList.remove("active");
+      document.getElementById(`step-${passoAtual}`).classList.remove("active");
       passoAtual--;
-      document.getElementById(`step-${passoAtual}`).classList.add("active");
+      if (passoAtual >= 0) {
+        document.getElementById(`step-${passoAtual}`).classList.add("active");
+      } else {
+        document.getElementById("step-inicio").classList.add("active");
+      }
     }
 
     function mostrarResumo() {
