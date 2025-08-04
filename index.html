@@ -134,6 +134,7 @@
         <label for="intensidade1">Intensidade: <span id="val1">0</span></label>
         <input type="range" id="intensidade1" min="0" max="10">
         <div class="nav-buttons">
+            <button type="button" onclick="prevStep()">← Anterior</button>
           <span></span><button type="button" onclick="nextStep()">Próximo →</button>
         </div>
       </div>
@@ -202,7 +203,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script>
     let passoAtual = -1;
-    const campos = ["situacao", "pensamento", "emocao", "lembranca", "reacao"];
+    const campos = ["inicio","situacao", "pensamento", "emocao", "lembranca", "reacao"];
 
     function nextStep() {
   if (passoAtual >= 0) {
