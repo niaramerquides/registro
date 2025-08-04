@@ -16,12 +16,7 @@ self.addEventListener('install', event => {
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request).then(response => {
-      // Se estiver em cache, retorna o cache
-      if (response) return response;
-
-      // Se não estiver em cache, tenta buscar da internet
-      return fetch(event.request).catch(() => {
-        // Se a internet falhar, retorna o index.html como fallback
+      return response || fetch(event.request).catch(() => {
         if (event.request.destination === 'document') {
           return caches.match('./index.html');
         }
