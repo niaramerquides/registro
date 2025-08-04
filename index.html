@@ -57,11 +57,6 @@
       color: #fff;
       margin-right: 10px;
     }
-    .step:nth-child(1) .circle { background-color: var(--azul); }
-    .step:nth-child(2) .circle { background-color: var(--roxo); }
-    .step:nth-child(3) .circle { background-color: var(--verde); }
-    .step:nth-child(4) .circle { background-color: var(--laranja); }
-    .step:nth-child(5) .circle { background-color: var(--vermelho); }
     label, textarea, input[type="range"] {
       display: block;
       margin-top: 10px;
@@ -116,47 +111,111 @@
 </head>
 <body>
   <div class="container">
-    <textarea id="situacao" style="display:none;"></textarea>
-    <input type="range" id="intensidade1" style="display:none;">
-    <textarea id="pensamento" style="display:none;"></textarea>
-    <input type="range" id="intensidade2" style="display:none;">
-    <textarea id="emocao" style="display:none;"></textarea>
-    <input type="range" id="intensidade3" style="display:none;">
-    <textarea id="lembranca" style="display:none;"></textarea>
-    <input type="range" id="intensidade4" style="display:none;">
-    <textarea id="reacao" style="display:none;"></textarea>
-    <input type="range" id="intensidade5" style="display:none;">
-    <div id="resultado" class="summary"></div>
-    <div id="summary" class="step"></div>
+    <form id="formulario">
+      <div class="step active" id="step-0">
+        <h2><span class="circle" style="background: var(--azul)">1</span>Situação 🧠</h2>
+        <label for="situacao">Descreva a situação:</label>
+        <textarea id="situacao"></textarea>
+        <label for="intensidade1">Intensidade: <span id="val1">0</span></label>
+        <input type="range" id="intensidade1" min="0" max="10">
+        <div class="nav-buttons">
+          <span></span><button type="button" onclick="nextStep()">Próximo →</button>
+        </div>
+      </div>
+      <div class="step" id="step-1">
+        <h2><span class="circle" style="background: var(--roxo)">2</span>Pensamento 💭</h2>
+        <label for="pensamento">Qual foi o pensamento?</label>
+        <textarea id="pensamento"></textarea>
+        <label for="intensidade2">Intensidade: <span id="val2">0</span></label>
+        <input type="range" id="intensidade2" min="0" max="10">
+        <div class="nav-buttons">
+          <button type="button" onclick="prevStep()">← Anterior</button>
+          <button type="button" onclick="nextStep()">Próximo →</button>
+        </div>
+      </div>
+      <div class="step" id="step-2">
+        <h2><span class="circle" style="background: var(--verde)">3</span>Emoção 💓</h2>
+        <label for="emocao">O que você sentiu?</label>
+        <textarea id="emocao"></textarea>
+        <label for="intensidade3">Intensidade: <span id="val3">0</span></label>
+        <input type="range" id="intensidade3" min="0" max="10">
+        <div class="nav-buttons">
+          <button type="button" onclick="prevStep()">← Anterior</button>
+          <button type="button" onclick="nextStep()">Próximo →</button>
+        </div>
+      </div>
+      <div class="step" id="step-3">
+        <h2><span class="circle" style="background: var(--laranja)">4</span>Lembrança 🧠</h2>
+        <label for="lembranca">Houve alguma lembrança associada?</label>
+        <textarea id="lembranca"></textarea>
+        <label for="intensidade4">Intensidade: <span id="val4">0</span></label>
+        <input type="range" id="intensidade4" min="0" max="10">
+        <div class="nav-buttons">
+          <button type="button" onclick="prevStep()">← Anterior</button>
+          <button type="button" onclick="nextStep()">Próximo →</button>
+        </div>
+      </div>
+      <div class="step" id="step-4">
+        <h2><span class="circle" style="background: var(--vermelho)">5</span>Reação ⚡</h2>
+        <label for="reacao">Qual foi sua reação?</label>
+        <textarea id="reacao"></textarea>
+        <label for="intensidade5">Intensidade: <span id="val5">0</span></label>
+        <input type="range" id="intensidade5" min="0" max="10">
+        <div class="nav-buttons">
+          <button type="button" onclick="prevStep()">← Anterior</button>
+          <button type="button" onclick="mostrarResumo()">Finalizar ✅</button>
+        </div>
+      </div>
+    </form>
+
+    <div id="summary" class="step">
+      <h2>📝 Seu Registro</h2>
+      <div id="resultado"></div>
+      <div class="final-buttons">
+        <button onclick="reiniciarFormulario()">🔁 Novo Registro</button>
+        <button onclick="exportarPDF()">📄 Exportar</button>
+      </div>
+      <div style="margin-top: 20px;">
+        <h3>💡 Por que funciona:</h3>
+        <p>Esse exercício ajuda a identificar padrões de pensamento e suas emoções associadas.</p>
+        <h3>🔔 Lembre-se:</h3>
+        <p>Registrar o que sentimos é um passo importante para compreender e transformar.</p>
+      </div>
+    </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script>
+    let passoAtual = 0;
     const campos = ["situacao", "pensamento", "emocao", "lembranca", "reacao"];
 
-    window.addEventListener('DOMContentLoaded', () => {
-      campos.forEach((campo, i) => {
-        const textarea = document.getElementById(campo);
-        const intensidade = document.getElementById(`intensidade${i+1}`);
-        if (textarea && intensidade) {
-          textarea.value = localStorage.getItem(campo) || "";
-          intensidade.value = localStorage.getItem(`intensidade${i+1}`) || 0;
-          textarea.addEventListener('input', () => localStorage.setItem(campo, textarea.value));
-          intensidade.addEventListener('input', () => localStorage.setItem(`intensidade${i+1}`, intensidade.value));
-        }
-      });
-    });
+    function nextStep() {
+      document.getElementById(`step-${passoAtual}`).classList.remove("active");
+      passoAtual++;
+      document.getElementById(`step-${passoAtual}`).classList.add("active");
+    }
 
-    function showSummary() {
+    function prevStep() {
+      document.getElementById(`step-${passoAtual}`).classList.remove("active");
+      passoAtual--;
+      document.getElementById(`step-${passoAtual}`).classList.add("active");
+    }
+
+    function mostrarResumo() {
       const resultado = document.getElementById("resultado");
-      let html = "<h2>📝 Seu Registro:</h2>";
+      let html = "";
       campos.forEach((c, i) => {
-        const val = document.getElementById(c)?.value || "";
-        const intensidade = document.getElementById(`intensidade${i+1}`)?.value || 0;
-        html += `<h3>${i+1}. ${c.charAt(0).toUpperCase() + c.slice(1)}:</h3><p>${val}</p><strong>Intensidade:</strong> ${intensidade}/10`;
+        const texto = document.getElementById(c).value;
+        const intensidade = document.getElementById(`intensidade${i+1}`).value;
+        html += `<h3>${i+1}. ${c.charAt(0).toUpperCase() + c.slice(1)}</h3><p>${texto}</p><strong>Intensidade:</strong> ${intensidade}/10`;
       });
-      resultado.innerHTML = html;
       document.getElementById("summary").classList.add("active");
+      document.getElementById(`step-${passoAtual}`).classList.remove("active");
+      resultado.innerHTML = html;
+    }
+
+    function reiniciarFormulario() {
+      location.reload();
     }
 
     function exportarPDF() {
@@ -170,6 +229,24 @@
       }).save();
     }
 
+    window.addEventListener("DOMContentLoaded", () => {
+      campos.forEach((campo, i) => {
+        const area = document.getElementById(campo);
+        const range = document.getElementById(`intensidade${i+1}`);
+        const label = document.getElementById(`val${i+1}`);
+
+        area.value = localStorage.getItem(campo) || "";
+        range.value = localStorage.getItem(`intensidade${i+1}`) || 0;
+        label.innerText = range.value;
+
+        area.addEventListener("input", () => localStorage.setItem(campo, area.value));
+        range.addEventListener("input", () => {
+          localStorage.setItem(`intensidade${i+1}`, range.value);
+          label.innerText = range.value;
+        });
+      });
+    });
+
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js')
         .then(reg => console.log('Service Worker registrado'))
@@ -178,4 +255,3 @@
   </script>
 </body>
 </html>
-
