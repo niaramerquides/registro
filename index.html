@@ -112,8 +112,7 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="step active" id="step-inicio">
+  <div class="step" id="step-0">
   <h2>📘 Instruções de uso</h2>
   <ul>
     <li>1️⃣ <strong>Preencha na ordem</strong> – cada etapa te guia para examinar seus pensamentos de forma objetiva</li>
@@ -123,11 +122,10 @@
   </ul>
   <div style="text-align:center; margin-top: 20px;">
        <div class="nav-buttons">
-          <span></span><button type="button" onclick="nextStep()">🚀 Começar</button>
-  </div>
+   <button onclick="iniciarFormulario()">🚀 Começar</button>  </div>
 </div>
 </div>
-<div class="step" id="step-0">
+<div class="step" id="step-1">
 <h2><span class="circle" style="background: var(--azul)">1</span>Situação 🧠</h2>
         <label for="situacao">Descreva a situação:</label>
         <textarea id="situacao"></textarea>
@@ -138,7 +136,7 @@
           <span></span><button type="button" onclick="nextStep()">Próximo →</button>
         </div>
       </div>
-      <div class="step" id="step-1">
+      <div class="step" id="step-2">
         <h2><span class="circle" style="background: var(--roxo)">2</span>Pensamento 💭</h2>
         <label for="pensamento">Qual foi o pensamento?</label>
         <textarea id="pensamento"></textarea>
@@ -149,7 +147,7 @@
           <button type="button" onclick="nextStep()">Próximo →</button>
         </div>
       </div>
-      <div class="step" id="step-2">
+      <div class="step" id="step-3">
         <h2><span class="circle" style="background: var(--verde)">3</span>Emoção 💓</h2>
         <label for="emocao">O que você sentiu?</label>
         <textarea id="emocao"></textarea>
@@ -160,7 +158,7 @@
           <button type="button" onclick="nextStep()">Próximo →</button>
         </div>
       </div>
-      <div class="step" id="step-3">
+      <div class="step" id="step-4">
         <h2><span class="circle" style="background: var(--laranja)">4</span>Lembrança 🧠</h2>
         <label for="lembranca">Houve alguma lembrança associada?</label>
         <textarea id="lembranca"></textarea>
@@ -171,7 +169,7 @@
           <button type="button" onclick="nextStep()">Próximo →</button>
         </div>
       </div>
-      <div class="step" id="step-4">
+      <div class="step" id="step-5">
         <h2><span class="circle" style="background: var(--vermelho)">5</span>Reação ⚡</h2>
         <label for="reacao">Qual foi sua reação?</label>
         <textarea id="reacao"></textarea>
@@ -203,7 +201,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script>
     let passoAtual = -1;
-    const campos = ["inicio","situacao", "pensamento", "emocao", "lembranca", "reacao"];
+    const campos = ["inicio", "situacao", "pensamento", "emocao", "lembranca", "reacao"];
 
     function nextStep() {
   if (passoAtual >= 0) {
