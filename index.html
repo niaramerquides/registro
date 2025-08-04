@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro Interativo de Pensamento</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#3f0071" />
+  <style>
+    :root {
+      --cor1: #001f3f;
+      --cor2: #3f0071;
+      --cor3: #fce4ec;
+      --roxo: #9c27b0;
+      --azul: #2196f3;
+      --verde: #4caf50;
+      --laranja: #ff9800;
+      --vermelho: #f44336;
+      --cinza: #eceff1;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, var(--cor1), var(--cor2));
+      color: #fff;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+    }
+    .step {
+      display: none;
+      background-color: #fff;
+      color: #333;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+    .step.active {
+      display: block;
+    }
+    h2 {
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+    }
+    .circle {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 28px;
+      font-weight: bold;
+      color: #fff;
+      margin-right: 10px;
+    }
+    .step:nth-child(1) .circle { background-color: var(--azul); }
+    .step:nth-child(2) .circle { background-color: var(--roxo); }
+    .step:nth-child(3) .circle { background-color: var(--verde); }
+    .step:nth-child(4) .circle { background-color: var(--laranja); }
+    .step:nth-child(5) .circle { background-color: var(--vermelho); }
+    label, textarea, input[type="range"] {
+      display: block;
+      margin-top: 10px;
+      width: 100%;
+    }
+    textarea {
+      height: 80px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      resize: vertical;
+      font-size: 14px;
+    }
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: #6a1b9a;
+      color: white;
+    }
+    button:hover {
+      background-color: #4a148c;
+    }
+    .summary {
+      background-color: #fff;
+      color: #333;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .summary h3 {
+      margin-top: 20px;
+    }
+    .final-buttons {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 30px;
+    }
+    .final-buttons button {
+      background-color: #2196f3;
+    }
+    .final-buttons button:nth-child(2) {
+      background-color: #4caf50;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- ... (todas as etapas do formulário permanecem iguais) ... -->
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    // Armazenamento local automático
+    const campos = ["situacao", "pensamento", "emocao", "lembranca", "reacao"];
+    campos.forEach((campo, i) => {
+      const textarea = document.getElementById(campo);
+      const intensidade = document.getElementById(`intensidade${i+1}`);
+      textarea.value = localStorage.getItem(campo) || "";
+      intensidade.value = localStorage.getItem(`intensidade${i+1}`) || 0;
+      textarea.addEventListener('input', () => localStorage.setItem(campo, textarea.value));
+      intensidade.addEventListener('input', () => localStorage.setItem(`intensidade${i+1}`, intensidade.value));
+    });
+
+    function nextStep(current) {
+      document.getElementById(`step${current}`).classList.remove("active");
+      document.getElementById(`step${current+1}`).classList.add("active");
+    }
+    function prevStep(current) {
+      document.getElementById(`step${current}`).classList.remove("active");
+      document.getElementById(`step${current-1}`).classList.add("active");
+    }
+    function showSummary() {
+      const resultado = document.getElementById("resultado");
+      let html = "<h2>📝 Seu Registro:</h2>";
+      campos.forEach((c, i) => {
+        const val = document.getElementById(c).value;
+        const intensidade = document.getElementById(`intensidade${i+1}`).value;
+        html += `<h3>${i+1}. ${c.charAt(0).toUpperCase() + c.slice(1)}:</h3><p>${val}</p><strong>Intensidade:</strong> ${intensidade}/10`;
+      });
+      resultado.innerHTML = html;
+      document.getElementById("step5").classList.remove("active");
+      document.getElementById("summary").classList.add("active");
+    }
+    function exportarPDF() {
+      const element = document.getElementById("summary");
+      html2pdf().from(element).set({
+        margin: 0.5,
+        filename: 'registro-de-pensamento.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+      }).save();
+    }
+
+    // Registro como PWA
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+        .then(reg => console.log('Service Worker registrado'))
+        .catch(err => console.error('Erro ao registrar SW:', err));
+    }
+  </script>
+</body>
+</html>
