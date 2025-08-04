@@ -122,7 +122,8 @@
     <li>4️⃣ <strong>Use regularmente</strong> – especialmente quando estiver tendo pensamentos difíceis</li>
   </ul>
   <div style="text-align:center; margin-top: 20px;">
-    <button onclick="iniciarFormulario()">🚀 Começar</button>
+       <div class="nav-buttons">
+          <span></span><button type="button" onclick="nextStep()">🚀 Começar</button>
   </div>
 </div>
 </div>
@@ -228,6 +229,11 @@
       passoAtual--;
       document.getElementById(`step-${passoAtual}`).classList.add("active");
     }
+function iniciarFormulario() {
+  document.getElementById("step-inicio").classList.remove("active");
+  passoAtual = 0;
+  document.getElementById("step-0").classList.add("active");
+}
 
     function mostrarResumo() {
       const resultado = document.getElementById("resultado");
