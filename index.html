@@ -116,42 +116,49 @@
 </head>
 <body>
   <div class="container">
-    <!-- ... (todas as etapas do formulário permanecem iguais) ... -->
+    <textarea id="situacao" style="display:none;"></textarea>
+    <input type="range" id="intensidade1" style="display:none;">
+    <textarea id="pensamento" style="display:none;"></textarea>
+    <input type="range" id="intensidade2" style="display:none;">
+    <textarea id="emocao" style="display:none;"></textarea>
+    <input type="range" id="intensidade3" style="display:none;">
+    <textarea id="lembranca" style="display:none;"></textarea>
+    <input type="range" id="intensidade4" style="display:none;">
+    <textarea id="reacao" style="display:none;"></textarea>
+    <input type="range" id="intensidade5" style="display:none;">
+    <div id="resultado" class="summary"></div>
+    <div id="summary" class="step"></div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script>
-    // Armazenamento local automático
     const campos = ["situacao", "pensamento", "emocao", "lembranca", "reacao"];
-    campos.forEach((campo, i) => {
-      const textarea = document.getElementById(campo);
-      const intensidade = document.getElementById(`intensidade${i+1}`);
-      textarea.value = localStorage.getItem(campo) || "";
-      intensidade.value = localStorage.getItem(`intensidade${i+1}`) || 0;
-      textarea.addEventListener('input', () => localStorage.setItem(campo, textarea.value));
-      intensidade.addEventListener('input', () => localStorage.setItem(`intensidade${i+1}`, intensidade.value));
+
+    window.addEventListener('DOMContentLoaded', () => {
+      campos.forEach((campo, i) => {
+        const textarea = document.getElementById(campo);
+        const intensidade = document.getElementById(`intensidade${i+1}`);
+        if (textarea && intensidade) {
+          textarea.value = localStorage.getItem(campo) || "";
+          intensidade.value = localStorage.getItem(`intensidade${i+1}`) || 0;
+          textarea.addEventListener('input', () => localStorage.setItem(campo, textarea.value));
+          intensidade.addEventListener('input', () => localStorage.setItem(`intensidade${i+1}`, intensidade.value));
+        }
+      });
     });
 
-    function nextStep(current) {
-      document.getElementById(`step${current}`).classList.remove("active");
-      document.getElementById(`step${current+1}`).classList.add("active");
-    }
-    function prevStep(current) {
-      document.getElementById(`step${current}`).classList.remove("active");
-      document.getElementById(`step${current-1}`).classList.add("active");
-    }
     function showSummary() {
       const resultado = document.getElementById("resultado");
       let html = "<h2>📝 Seu Registro:</h2>";
       campos.forEach((c, i) => {
-        const val = document.getElementById(c).value;
-        const intensidade = document.getElementById(`intensidade${i+1}`).value;
+        const val = document.getElementById(c)?.value || "";
+        const intensidade = document.getElementById(`intensidade${i+1}`)?.value || 0;
         html += `<h3>${i+1}. ${c.charAt(0).toUpperCase() + c.slice(1)}:</h3><p>${val}</p><strong>Intensidade:</strong> ${intensidade}/10`;
       });
       resultado.innerHTML = html;
-      document.getElementById("step5").classList.remove("active");
       document.getElementById("summary").classList.add("active");
     }
+
     function exportarPDF() {
       const element = document.getElementById("summary");
       html2pdf().from(element).set({
@@ -163,7 +170,6 @@
       }).save();
     }
 
-    // Registro como PWA
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js')
         .then(reg => console.log('Service Worker registrado'))
@@ -172,3 +178,4 @@
   </script>
 </body>
 </html>
+
