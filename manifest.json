@@ -1,20 +1,25 @@
 {
   "name": "Registro Psi",
   "short_name": "Registro Psi",
-  "start_url": "./",
+  "description": "Ferramenta terapêutica interativa para registrar e refletir sobre pensamentos e emoções.",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#3f0071",
   "theme_color": "#3f0071",
   "icons": [
     {
       "src": "icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }
