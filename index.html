@@ -114,10 +114,7 @@
 <body>
   <div class="container">
     <form id="formulario">
-      <div style="margin-bottom: 20px; text-align: center;">
-  <button onclick="instalarPWA()" style="background-color: #2196f3; font-size: 18px; padding: 12px 20px; border-radius: 10px;">📲 Salve o web app</button>
-</div>
-$1
+      
         <h2><span class="circle" style="background: var(--azul)">1</span>Situação 🧠</h2>
         <label for="situacao">Descreva a situação:</label>
         <textarea id="situacao"></textarea>
@@ -189,29 +186,7 @@ $1
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js">let promptEvent;
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  promptEvent = e;
-});
-
-function instalarPWA() {
-  if (promptEvent) {
-    promptEvent.prompt();
-    promptEvent.userChoice.then(choiceResult => {
-      if (choiceResult.outcome === 'accepted') {
-        console.log('PWA instalado');
-      } else {
-        console.log('PWA recusado');
-      }
-      promptEvent = null;
-    });
-  } else {
-    alert("Este navegador não suporta instalação de PWA ou já está instalado.");
-  }
-}
-
-</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script>
     let passoAtual = 0;
     const campos = ["situacao", "pensamento", "emocao", "lembranca", "reacao"];
