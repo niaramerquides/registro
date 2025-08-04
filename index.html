@@ -5,8 +5,8 @@
   <title>Registro Psi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="manifest" href="manifest.json">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
   <meta name="theme-color" content="#3f0071" />
   <style>
     :root {
@@ -114,7 +114,10 @@
 <body>
   <div class="container">
     <form id="formulario">
-      <div class="step active" id="step-0">
+      <div style="margin-bottom: 20px; text-align: center;">
+  <button onclick="instalarPWA()" style="background-color: #2196f3; font-size: 18px; padding: 12px 20px; border-radius: 10px;">📲 Salve o web app</button>
+</div>
+$1
         <h2><span class="circle" style="background: var(--azul)">1</span>Situação 🧠</h2>
         <label for="situacao">Descreva a situação:</label>
         <textarea id="situacao"></textarea>
@@ -186,7 +189,29 @@
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js">let promptEvent;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  promptEvent = e;
+});
+
+function instalarPWA() {
+  if (promptEvent) {
+    promptEvent.prompt();
+    promptEvent.userChoice.then(choiceResult => {
+      if (choiceResult.outcome === 'accepted') {
+        console.log('PWA instalado');
+      } else {
+        console.log('PWA recusado');
+      }
+      promptEvent = null;
+    });
+  } else {
+    alert("Este navegador não suporta instalação de PWA ou já está instalado.");
+  }
+}
+
+</script>
   <script>
     let passoAtual = 0;
     const campos = ["situacao", "pensamento", "emocao", "lembranca", "reacao"];
