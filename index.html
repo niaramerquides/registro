@@ -224,12 +224,25 @@ let passoAtual = -1;
   passoAtual++;
   document.getElementById(`step-${passoAtual}`).classList.add("active");
 }`).classList.remove("active");
+  } else {
+    document.getElementById("step-inicio").classList.remove("active");
+  }
+  passoAtual++;
+  document.getElementById(`step-${passoAtual}`).classList.add("active");
+}`).classList.remove("active");
       passoAtual++;
       document.getElementById(`step-${passoAtual}`).classList.add("active");
     }
 
     function prevStep() {
   document.getElementById(`step-${passoAtual}`).classList.remove("active");
+  passoAtual--;
+  if (passoAtual >= 0) {
+    document.getElementById(`step-${passoAtual}`).classList.add("active");
+  } else {
+    document.getElementById("step-inicio").classList.add("active");
+  }
+}`).classList.remove("active");
   passoAtual--;
   if (passoAtual >= 0) {
     document.getElementById(`step-${passoAtual}`).classList.add("active");
